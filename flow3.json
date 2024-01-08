@@ -1,0 +1,89 @@
+[
+    {
+        "id": "cd83e4a6b2a323b7",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8d3d5a1fafa40da3",
+        "type": "mqtt in",
+        "z": "cd83e4a6b2a323b7",
+        "name": "",
+        "topic": "topicSecret",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "f845d17567b09a32",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 140,
+        "y": 360,
+        "wires": [
+            [
+                "e38c842e3a377182"
+            ]
+        ]
+    },
+    {
+        "id": "e38c842e3a377182",
+        "type": "function",
+        "z": "cd83e4a6b2a323b7",
+        "name": "",
+        "func": "if(msg.payload=='AABBCCDDEEFF121314') \n{\n    msg.payload=\"\";\n    return msg;\n    \n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 360,
+        "wires": [
+            [
+                "d641d14d979cb8f7"
+            ]
+        ]
+    },
+    {
+        "id": "d641d14d979cb8f7",
+        "type": "file",
+        "z": "cd83e4a6b2a323b7",
+        "name": "",
+        "filename": "C:\\Users\\LENOVO\\Desktop\\data\\logging.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 690,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f845d17567b09a32",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

@@ -1,0 +1,133 @@
+[
+    {
+        "id": "65766a2b0d90e322",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "944fa02d0811e9d7",
+        "type": "mqtt in",
+        "z": "65766a2b0d90e322",
+        "name": "",
+        "topic": "BCDS/XDK/single/20:19:AB:F4:04:4D/out/stream",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "f845d17567b09a32",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "804df1b6a1feb234"
+            ]
+        ]
+    },
+    {
+        "id": "eee7dd7ce6762e01",
+        "type": "file",
+        "z": "65766a2b0d90e322",
+        "name": "",
+        "filename": "C:\\Users\\LENOVO\\Desktop\\data\\logging.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 850,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bb7acfc11c24352e",
+        "type": "function",
+        "z": "65766a2b0d90e322",
+        "name": "",
+        "func": "var date=new Date();\nvar month = date.getMonth();\nvar day = date.getDay();\nvar year = date.getFullYear();\nvar hour= date.getHours();\nvar min= date.getMinutes();\nmsg.payload=hour+\":\"+min+\"; \"+day+\"/\"+month+\"/\"+ year+\"; \"+msg.payload ;\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 460,
+        "wires": [
+            [
+                "7e897d3a37815ad8"
+            ]
+        ]
+    },
+    {
+        "id": "804df1b6a1feb234",
+        "type": "function",
+        "z": "65766a2b0d90e322",
+        "name": "",
+        "func": "p=msg.payload;\nvar msg1={payload:p.data.temp.value*0.001}\nreturn [msg1];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 380,
+        "wires": [
+            [
+                "bb7acfc11c24352e"
+            ]
+        ]
+    },
+    {
+        "id": "7e897d3a37815ad8",
+        "type": "trigger",
+        "z": "65766a2b0d90e322",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "60",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 550,
+        "y": 280,
+        "wires": [
+            [
+                "eee7dd7ce6762e01"
+            ]
+        ]
+    },
+    {
+        "id": "f845d17567b09a32",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]
